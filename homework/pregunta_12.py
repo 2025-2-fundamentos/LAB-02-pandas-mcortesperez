@@ -22,3 +22,23 @@ def pregunta_12():
     38   38                    eee:0,fff:9,iii:2
     39   39                    ggg:3,hhh:8,jjj:5
     """
+
+import pandas as pd
+
+def pregunta_12():
+    tbl2 = pd.read_csv("files/input/tbl2.tsv", sep="\t")
+
+    # Unimos c5a y c5b en un solo string tipo 'xxx:5'
+    tbl2["pair"] = tbl2["c5a"] + ":" + tbl2["c5b"].astype(str)
+
+    # Agrupamos por c0 y ordenamos alfabéticamente por c5a
+    df = (
+        tbl2.sort_values(["c0", "c5a"])
+            .groupby("c0")["pair"]
+            .apply(lambda x: ",".join(x))
+            .reset_index(name="c5")
+    )
+
+    return df
+
+pregunta_12()

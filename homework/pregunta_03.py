@@ -5,8 +5,10 @@ datos requeridos se encuentran en los archivos `tbl0.tsv`, `tbl1.tsv` y
 librerias de pandas para resolver las preguntas.
 """
 
+import pandas as pd
 
 def pregunta_03():
+    
     """
     ¿Cuál es la cantidad de registros por cada letra de la columna `c1` del
     archivo `tbl0.tsv`?
@@ -21,3 +23,8 @@ def pregunta_03():
     Name: count, dtype: int64
 
     """
+    
+    df = pd.read_csv("files/input/tbl0.tsv", sep="\t")
+    return df["c1"].value_counts().sort_index()
+
+pregunta_03()
